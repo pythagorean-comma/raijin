@@ -1,0 +1,148 @@
+<svg viewBox="0 0 900 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Wiring diagram of the Pico 2 W Random Cue Trainer">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8a8378"></path>
+    </marker>
+    <style>
+      .box{fill:#ffffff;stroke:#cfc8bd;stroke-width:1.4}
+      .ttl{font:600 12.5px -apple-system,Segoe UI,Roboto,sans-serif;fill:#1c1a17}
+      .sub{font:11px -apple-system,Segoe UI,Roboto,sans-serif;fill:#6b645c}
+      .pin{font:600 10.5px ui-monospace,Menlo,Consolas,monospace;fill:#3d3831}
+      .wl {font:10.5px -apple-system,Segoe UI,Roboto,sans-serif;fill:#6b645c}
+      .pw{stroke:#c1440e;stroke-width:2.2;fill:none}
+      .gnd{stroke:#33302b;stroke-width:2.2;fill:none}
+      .sig{stroke:#1d6a75;stroke-width:2;fill:none}
+      .aud{stroke:#6b4fa8;stroke-width:2;fill:none}
+      .thin{stroke:#8a8378;stroke-width:1.2;fill:none}
+    </style>
+  </defs>
+
+  <!-- POWER COLUMN -->
+  <rect class="box" x="30" y="34" width="182" height="58" rx="8"></rect>
+  <text class="ttl" x="46" y="57">USB power bank</text>
+  <text class="sub" x="46" y="75">5 V, 2 A+ output</text>
+
+  <path class="thin" d="M121,92 L121,122" marker-end="url(#ar)"></path>
+  <text class="wl" x="128" y="111">USB-A male pigtail</text>
+
+  <rect class="box" x="30" y="126" width="182" height="44" rx="8"></rect>
+  <text class="ttl" x="46" y="145">Master power switch</text>
+  <text class="sub" x="46" y="161">6.3 mm spades, in the red wire</text>
+
+  <path class="thin" d="M121,170 L121,194" marker-end="url(#ar)"></path>
+
+  <rect x="30" y="198" width="182" height="40" rx="8" fill="#fdeee6" stroke="#e0a184" stroke-width="1.4"></rect>
+  <text class="ttl" x="46" y="217">+5 V WAGO</text>
+  <text class="sub" x="46" y="231">221-415 · 5-way</text>
+
+  <rect x="30" y="256" width="182" height="40" rx="8" fill="#eeece9" stroke="#a8a29a" stroke-width="1.4"></rect>
+  <text class="ttl" x="46" y="275">GND WAGO</text>
+  <text class="sub" x="46" y="289">221-415 · 5-way</text>
+
+  <path class="thin" d="M198,238 L198,256"></path>
+  <path class="pw" d="M186,238 L210,238"></path>
+  <path class="gnd" d="M186,256 L210,256"></path>
+  <text class="wl" x="34" y="320">1000 µF capacitor legs push</text>
+  <text class="wl" x="34" y="334">straight into the two WAGOs</text>
+  <text class="wl" x="34" y="348">(stripe = negative = GND)</text>
+
+  <!-- BUS RAILS -->
+  <path class="pw" d="M212,218 L244,218 L244,588"></path>
+  <path class="gnd" d="M212,276 L266,276 L266,612"></path>
+
+  <!-- Pico power branch, with the Schottky diode -->
+  <path class="pw" d="M244,218 L252,218 A7,7 0 0 1 266,218 L276,218"></path>
+  <path class="pw" d="M300,218 L310,218"></path>
+  <path class="pw" d="M276,218 L282,218"></path>
+  <path d="M282,211 L282,225 L297,218 z" fill="#fff" stroke="#c1440e" stroke-width="1.8" stroke-linejoin="round"></path>
+  <path class="pw" d="M297,210 L297,226"></path>
+  <text class="wl" x="266" y="200">1N5817</text>
+  <path class="gnd" d="M266,244 L310,244"></path>
+
+  <!-- amp power -->
+  <path class="pw" d="M244,400 L252,400 A7,7 0 0 1 266,400 L310,400"></path>
+  <path class="gnd" d="M266,424 L310,424"></path>
+  <!-- mosfet power -->
+  <path class="pw" d="M244,588 L252,588 A7,7 0 0 1 266,588 L310,588"></path>
+  <path class="gnd" d="M266,612 L310,612"></path>
+
+  <!-- PICO -->
+  <rect class="box" x="310" y="190" width="232" height="130" rx="8"></rect>
+  <text class="ttl" x="326" y="213">Raspberry Pi Pico 2 W</text>
+  <text class="sub" x="326" y="229">on a screw-terminal expansion board</text>
+  <text class="pin" x="326" y="252">VSYS pin 39 · GND pin 38</text>
+  <text class="pin" x="326" y="270">GP16 17 18 → amplifier</text>
+  <text class="pin" x="326" y="288">GP15 → MOSFET · GP14 → button</text>
+  <text class="pin" x="326" y="306">GP24 25 29 = wireless, keep clear</text>
+
+  <!-- AMP -->
+  <rect class="box" x="310" y="372" width="232" height="120" rx="8"></rect>
+  <text class="ttl" x="326" y="395">MAX98357A I2S amplifier</text>
+  <text class="sub" x="326" y="411">3.2 W into 4 Ω · 2.5–5.5 V</text>
+  <text class="pin" x="326" y="434">VIN · GND</text>
+  <text class="pin" x="326" y="452">BCLK · LRC · DIN</text>
+  <text class="pin" x="326" y="470">GAIN and SD: leave unconnected</text>
+
+  <!-- MOSFET -->
+  <rect class="box" x="310" y="546" width="232" height="112" rx="8"></rect>
+  <text class="ttl" x="326" y="569">MOSFET switch module</text>
+  <text class="sub" x="326" y="585">DFRobot DFR0457 · 3.3 V logic</text>
+  <text class="pin" x="326" y="608">VIN+ · VIN−  screw terms</text>
+  <text class="pin" x="326" y="626">SIG · VCC · GND ← Pico</text>
+  <text class="pin" x="326" y="644">OUT+ · OUT− → LED WAGOs</text>
+
+  <!-- BUTTON -->
+  <rect class="box" x="656" y="196" width="210" height="100" rx="8"></rect>
+  <text class="ttl" x="672" y="219">Panel push button</text>
+  <text class="pin" x="672" y="243">GP14 and GND</text>
+  <text class="sub" x="672" y="261">short press = start / stop</text>
+  <text class="sub" x="672" y="279">long press = volume</text>
+
+  <!-- SPEAKER -->
+  <rect class="box" x="656" y="392" width="200" height="86" rx="8"></rect>
+  <text class="ttl" x="672" y="415">Speaker</text>
+  <text class="sub" x="672" y="432">4 Ω · 3 W · 50–66 mm</text>
+  <text class="sub" x="672" y="452">Do not connect either leg</text>
+  <text class="sub" x="672" y="466">to GND — it is a bridged amp</text>
+
+  <!-- LED -->
+  <rect class="box" x="656" y="546" width="208" height="112" rx="8"></rect>
+  <text class="ttl" x="672" y="569">LED strips</text>
+  <text class="sub" x="672" y="585">3 × 150 mm COB, paralleled in WAGOs</text>
+  <rect x="672" y="598" width="150" height="9" rx="4" fill="#f6d9a8" stroke="#d9a441"></rect>
+  <rect x="672" y="616" width="150" height="9" rx="4" fill="#f6d9a8" stroke="#d9a441"></rect>
+  <rect x="672" y="634" width="150" height="9" rx="4" fill="#f6d9a8" stroke="#d9a441"></rect>
+
+  <!-- SIGNALS: Pico -> button -->
+  <path class="sig" d="M542,238 L656,236"></path>
+  <path class="gnd" d="M542,256 L656,254"></path>
+
+  <!-- Pico -> amp, three I2S lines -->
+  <path class="sig" d="M350,320 L350,372"></path>
+  <path class="sig" d="M400,320 L400,372"></path>
+  <path class="sig" d="M450,320 L450,372"></path>
+  <text class="wl" x="314" y="348">GP16</text>
+  <text class="wl" x="362" y="348">GP17</text>
+  <text class="wl" x="412" y="348">GP18</text>
+
+  <!-- Pico GP15 + GND -> MOSFET -->
+  <path class="sig" d="M542,300 L590,300 L590,424 A7,7 0 0 1 590,438 L590,522 L470,522 L470,546"></path>
+  <text class="wl" x="598" y="506">GP15 · 3V3 · GND</text>
+
+  <!-- amp -> speaker -->
+  <path class="aud" d="M542,430 L656,428"></path>
+  <text class="wl" x="556" y="420">speaker + / −</text>
+
+  <!-- mosfet -> LED -->
+  <path class="pw" d="M542,600 L656,600"></path>
+  <path class="gnd" d="M542,624 L656,624"></path>
+  <text class="wl" x="562" y="592">OUT+</text>
+  <text class="wl" x="562" y="644">OUT−</text>
+
+  <!-- LEGEND -->
+  <path class="pw" d="M40,692 L72,692"></path>   <text class="wl" x="80" y="696">+5 V</text>
+  <path class="gnd" d="M124,692 L156,692"></path> <text class="wl" x="164" y="696">GND</text>
+  <path class="sig" d="M208,692 L240,692"></path> <text class="wl" x="248" y="696">signal</text>
+  <path class="aud" d="M300,692 L332,692"></path> <text class="wl" x="340" y="696">speaker</text>
+  <text class="wl" x="420" y="696">Crossing lines are not connected — the small hops show one wire passing over another.</text>
+</svg>
