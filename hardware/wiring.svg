@@ -72,7 +72,6 @@
   <text class="sub" x="326" y="229">on a screw-terminal expansion board</text>
   <text class="pin" x="326" y="252">VSYS pin 39 · GND pin 38</text>
   <text class="pin" x="326" y="270">GP16 17 18 → amplifier</text>
-  <text class="pin" x="326" y="288">GP15 → MOSFET · GP14 → button</text>
   <text class="pin" x="326" y="306">GP24 25 29 = wireless, keep clear</text>
 
   <!-- AMP -->
@@ -91,13 +90,6 @@
   <text class="pin" x="326" y="626">SIG · VCC · GND ← Pico</text>
   <text class="pin" x="326" y="644">OUT+ · OUT− → LED WAGOs</text>
 
-  <!-- BUTTON -->
-  <rect class="box" x="656" y="196" width="210" height="100" rx="8"></rect>
-  <text class="ttl" x="672" y="219">Panel push button</text>
-  <text class="pin" x="672" y="243">GP14 and GND</text>
-  <text class="sub" x="672" y="261">short press = start / stop</text>
-  <text class="sub" x="672" y="279">long press = volume</text>
-
   <!-- SPEAKER -->
   <rect class="box" x="656" y="392" width="200" height="86" rx="8"></rect>
   <text class="ttl" x="672" y="415">Speaker</text>
@@ -108,14 +100,10 @@
   <!-- LED -->
   <rect class="box" x="656" y="546" width="208" height="112" rx="8"></rect>
   <text class="ttl" x="672" y="569">LED strips</text>
-  <text class="sub" x="672" y="585">3 × 150 mm COB, paralleled in WAGOs</text>
+  <text class="sub" x="672" y="585">3 × 150 mm COB, connected in series</text>
   <rect x="672" y="598" width="150" height="9" rx="4" fill="#f6d9a8" stroke="#d9a441"></rect>
   <rect x="672" y="616" width="150" height="9" rx="4" fill="#f6d9a8" stroke="#d9a441"></rect>
   <rect x="672" y="634" width="150" height="9" rx="4" fill="#f6d9a8" stroke="#d9a441"></rect>
-
-  <!-- SIGNALS: Pico -> button -->
-  <path class="sig" d="M542,238 L656,236"></path>
-  <path class="gnd" d="M542,256 L656,254"></path>
 
   <!-- Pico -> amp, three I2S lines -->
   <path class="sig" d="M350,320 L350,372"></path>
