@@ -1,0 +1,75 @@
+;
+; i2s.pio -- I2S (Philips format) transmitter for the RP2350 PIO block.
+;
+; One state machine drives BCLK + LRCLK via side-set and DIN via `out pins`.
+; The TX FIFO is fed 32-bit words holding two 16-bit samples, left in the high
+; half, right in the low half:  (left << 16) | (right & 0xffff)
+;
+; Timing: every bit takes exactly 2 PIO cycles (BCLK low, then BCLK high), and
+; a stereo frame is 32 bits, so
+;
+;     pio_clock = 64 * sample_rate
+;
+; There are no idle cycles anywhere in the loop, so BCLK is continuous and the
+; frame period is exact.
+;
+; The LRCLK edge lands on the *last* bit of the preceding word rather than the
+; first bit of the new one -- that one-BCLK offset is what makes this Philips
+; I2S rather than left-justified. A MAX98357A expects exactly this.
+;
+
+.program i2s_out
+.side_set 2                     ; side-set bit 0 = BCLK, bit 1 = LRCLK
+
+; (`left`/`right` are pioasm keywords, hence lchan/rchan.)
+;
+; Entry expects x = 14 (the loop runs x+1 = 15 times, plus one trailing `out`,
+; giving 16 bits per channel). Autopull is enabled with a threshold of 32.
+
+.wrap_target
+lchan:
+    out pins, 1         side 0b00   ; LRCLK low = left channel, BCLK low
+    jmp x-- lchan       side 0b01   ; BCLK high: the DAC samples the bit here
+    out pins, 1         side 0b10   ; 16th left bit; LRCLK flips high on this bit
+    set x, 14           side 0b11
+rchan:
+    out pins, 1         side 0b10   ; LRCLK high = right channel
+    jmp x-- rchan       side 0b11
+    out pins, 1         side 0b00   ; 16th right bit; LRCLK flips low on this bit
+    set x, 14           side 0b01
+.wrap
+
+% c-sdk {
+#include "hardware/clocks.h"
+
+// gpio_data           : DIN  (single pin)
+// gpio_clock_base     : BCLK, and BCLK+1 must be LRCLK (they must be adjacent)
+static inline void i2s_out_program_init(PIO pio, uint sm, uint offset,
+                                        uint gpio_data, uint gpio_clock_base,
+                                        uint sample_rate) {
+    pio_gpio_init(pio, gpio_data);
+    pio_gpio_init(pio, gpio_clock_base);
+    pio_gpio_init(pio, gpio_clock_base + 1);
+
+    pio_sm_set_consecutive_pindirs(pio, sm, gpio_data, 1, true);
+    pio_sm_set_consecutive_pindirs(pio, sm, gpio_clock_base, 2, true);
+
+    pio_sm_config c = i2s_out_program_get_default_config(offset);
+    sm_config_set_out_pins(&c, gpio_data, 1);
+    sm_config_set_sideset_pins(&c, gpio_clock_base);
+
+    // MSB first, autopull one 32-bit stereo frame at a time.
+    sm_config_set_out_shift(&c, false /* shift left */, true /* autopull */, 32);
+    sm_config_set_fifo_join(&c, PIO_FIFO_JOIN_TX);   // 8-entry TX FIFO
+
+    // 2 PIO cycles per bit * 32 bits per frame = 64 cycles per frame.
+    float div = (float)clock_get_hz(clk_sys) / (float)(sample_rate * 64u);
+    sm_config_set_clkdiv(&c, div);
+
+    pio_sm_init(pio, sm, offset, &c);
+
+    // Preload the bit counter, then start.
+    pio_sm_exec(pio, sm, pio_encode_set(pio_x, 14));
+    pio_sm_set_enabled(pio, sm, true);
+}
+%}
