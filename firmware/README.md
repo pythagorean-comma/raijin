@@ -14,12 +14,12 @@ verified by simulation.
 
 16-bit mono PCM at various rates, per 10-second clip:
 
-| Sample rate | Per clip | 5 clips | Verdict |
-|---|---|---|---|
-| 44 100 Hz | 882 KB | 4.3 MB | doesn't fit |
-| 32 000 Hz | 640 KB | 3.1 MB | tight |
+| Sample rate   | Per clip   | 5 clips    | Verdict                            |
+|---------------|------------|------------|------------------------------------|
+| 44 100 Hz     | 882 KB     | 4.3 MB     | doesn't fit                        |
+| 32 000 Hz     | 640 KB     | 3.1 MB     | tight                              |
 | **22 050 Hz** | **441 KB** | **2.2 MB** | **comfortable — the default here** |
-| 16 000 Hz | 320 KB | 1.6 MB | plenty of headroom |
+| 16 000 Hz     | 320 KB     | 1.6 MB     | plenty of headroom                 |
 
 Measured from the build in this repo (two 10 s clips at 22.05 kHz):
 
@@ -45,14 +45,14 @@ via `libopus` fixed-point gets 20:1 but wants a lot more code space and CPU.
 
 ## Hardware
 
-| MAX98357A | Pico 2 W | Notes |
-|---|---|---|
-| `BCLK` | GP16 | side-set pin 0 |
-| `LRC`  | GP17 | must be `BCLK + 1` — PIO side-set needs them adjacent |
-| `DIN`  | GP18 | any free GPIO |
-| `SD`   | GP19 | driven low between clips to kill idle hiss |
-| `VIN`  | VSYS/3V3 | 5 V gives noticeably more output |
-| `GND`  | GND | |
+| MAX98357A | Pico 2 W | Notes                                                 |
+|-----------|----------|-------------------------------------------------------|
+| `BCLK`    | GP16     | side-set pin 0                                        |
+| `LRC`     | GP17     | must be `BCLK + 1` — PIO side-set needs them adjacent |
+| `DIN`     | GP18     | any free GPIO                                         |
+| `SD`      | GP19     | driven low between clips to kill idle hiss            |
+| `VIN`     | VSYS/3V3 | 5 V gives noticeably more output                      |
+| `GND`     | GND      |                                                       |
 
 Leave `GAIN` floating for 9 dB. Pin assignments are `#define`s at the top of
 `src/audio.h`.

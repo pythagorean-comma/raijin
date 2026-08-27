@@ -23,6 +23,17 @@
 | Hammond 1556GAWH ABS box                        | This is the enclosue into which we will mount all the components and keep them out of sight. The outside of the lid will have the led strips.                                                                                                                                                                                                                                                                                                                                                           | 1        | [RS Components](https://uk.rs-online.com/web/p/general-purpose-enclosures/2777586)                           |
 | Micro-USB cable                                 | Make sure you get a cable that carries both charge and data. Some only carry charge and you will not be able to flash the firmware.                                                                                                                                                                                                                                                                                                                                                                     | 1        | [The Pi Hut](https://thepihut.com/products/usb-c-to-micro-usb-cable-black)                                   |
 
+## Tools
+
+We have tried to make this as simple as possible to assemble but there is still a need to prepare cables and perform 
+some very basic soldering. there are plenty of options on the market. These are just the ones we happen to like.
+
+| Tool           | Description                                                | Link                                                                                                   |
+|----------------|------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
+| Engineer PA-09 | Japanese made precisely engineered universal crimping tool | [The Pi Hut](https://thepihut.com/products/universal-micro-crimping-pliers-1-0-to-1-9mm-size-contacts) |
+| Engineer PA-14 | Japanese made professional grade wire strippers            | [The Pi Hut](https://thepihut.com/products/engineer-pa-14-pro-wire-strippers-awg20-awg34)              |
+| Pinecil V2     | Smart USB-C powered Mini Portable Soldering Iron           | [Test Clips](https://testclips.co.uk/product/pinecil-smart-mini-portable-soldering-iron/)              |
+
 ## Wiring
 ![Wiring Diagram](wiring.svg)
 
@@ -53,7 +64,7 @@ Fourteen connections. Work down the list and the power side of the box is wired.
 |-----|-----------------------------------------|-----------------------------------------|------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | P1  | Power bank USB socket                   | USB-A male pigtail                      | The cable itself | Plug it in. The far end is two bare wires, red and black.                                                                                                        |
 | P2  | Pigtail red                             | Switch, + terminal                      | Pigtail's own    | 6.3 mm spade crimp. This is the supply coming in.                                                                                                                |
-| P3  | Switch, headlamp terminal               | +5 V WAGO                               | 16/0.2           | Spade at the switch, bare wire into the WAGO. This one wire carries the whole box current, so everything after it is fed through it.                             |
+| P3  | Switch, headlamp terminal               | +5 V WAGO                               | 7/0.2            | Spade at the switch, bare wire into the WAGO. This one wire carries the whole box current, so everything after it is fed through it.                             |
 | P4  | Switch, ground terminal                 | Pico board, spare GND terminal (pin 33) | 7/0.2            | Spade at the switch, bare wire into the screw terminal. This only feeds the switch lamp, 10 to 20 mA.                                                            |
 | P5  | Pigtail black                           | GND WAGO                                | Pigtail's own    | Bare wire into the WAGO.                                                                                                                                         |
 | P6  | Capacitor 1000 µF, + leg                | +5 V WAGO                               | Component leg    | The leg goes straight in. No wire, no crimp.                                                                                                                     |
@@ -68,7 +79,7 @@ Fourteen connections. Work down the list and the power side of the box is wired.
 
 #### What goes in each WAGO
 
-There are only two WAGOs, one for each supply bus. The strips are chained to each other rather than fed one at a time, which is what keeps the count this low.
+There are only two WAGOs, one for each supply bus.
 
 **+5 V bus, 5-way, all 5 ways used**
 
@@ -86,8 +97,6 @@ There are only two WAGOs, one for each supply bus. The strips are chained to eac
 4. Amplifier GND (P12)
 5. MOSFET VIN− (P14)
 
-Both buses are completely full, which is worth knowing before you add anything later. If you need a sixth wire on a bus, link a second WAGO to it with a short jumper. Never force two wires into one hole.
-
 Low current grounds do not need to come here at all. The switch lamp goes to a spare GND screw terminal on the Pico board instead (P4), which is why ground still fits in one connector.
 
 ### Signal connections
@@ -99,7 +108,7 @@ Six connections. These carry no real current, so 7/0.2 is used throughout.
 | S1 | Pico GP16 (pin 21)     | MAX98357A BCLK                       | 7/0.2          | Screw terminal at the Pico, Dupont at the amplifier.                                           |
 | S2 | Pico GP17 (pin 22)     | MAX98357A LRC                        | 7/0.2          | Same as S1.                                                                                    |
 | S3 | Pico GP18 (pin 24)     | MAX98357A DIN                        | 7/0.2          | Same as S1.                                                                                    |
-| S4 | Pico GP15 (pin 20)     | MOSFET module signal (green or blue) | Supplied cable | Use the module's own 3-pin Gravity cable. Cut the housing off the far end, see below.           |
+| S4 | Pico GP15 (pin 20)     | MOSFET module signal (green or blue) | Supplied cable | Use the module's own 3-pin Gravity cable. Cut the housing off the far end, see below.          |
 | S5 | Pico 3V3(OUT) (pin 36) | MOSFET module VCC (red)              | Supplied cable | Same cable. Take this from the Pico's 3.3 V output, not from the 5 V bus.                      |
 | S6 | Pico GND (pin 18)      | MOSFET module GND (black)            | Supplied cable | Same cable. This one is not optional. Without a shared ground the module switches erratically. |
 
@@ -109,13 +118,12 @@ S4, S5 and S6 are all one cable, not three separate wires. The MOSFET module com
 
 The other end will not plug into anything. It carries a 3-way Dupont housing, and the three pins you need are nowhere near each other. 3V3(OUT) is only available at pin 36, and its neighbours are 3V3_EN and a ground, so there is no run of three adjacent pins that gives you a signal, 3.3 V and a ground. The Pico end of this build is screw terminals in any case.
 
-So cut the housing off, strip the three wires, fit a ferrule to each and screw them in by colour:
+So cut the housing off, strip the three wires, optionally fit a ferrule to each and screw them in by colour:
 
 1. Green or blue is the signal, to GP15 (pin 20)
 2. Red is VCC, to 3V3(OUT) (pin 36)
 3. Black is ground, to GND (pin 18)
 
-The crimps can be lifted out of the housing with a fine pick if you would rather not cut. It is not worth it. You end up putting a bare crimp into a screw terminal, which grips worse than a ferrule.
 
 #### Pico pins used
 
