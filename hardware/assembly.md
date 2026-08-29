@@ -29,11 +29,12 @@
 We have tried to make this as simple as possible to assemble but there is still a need to prepare cables and perform 
 some very basic soldering. there are plenty of options on the market. These are just the ones we happen to like.
 
-| Tool           | Description                                                | Link                                                                                                   |
-|----------------|------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
-| Engineer PA-09 | Japanese made precisely engineered universal crimping tool | [The Pi Hut](https://thepihut.com/products/universal-micro-crimping-pliers-1-0-to-1-9mm-size-contacts) |
-| Engineer PA-14 | Japanese made professional grade wire strippers            | [The Pi Hut](https://thepihut.com/products/engineer-pa-14-pro-wire-strippers-awg20-awg34)              |
-| Pinecil V2     | Smart USB-C powered Mini Portable Soldering Iron           | [Test Clips](https://testclips.co.uk/product/pinecil-smart-mini-portable-soldering-iron/)              |
+| Tool                                  | Description                                                         | Link                                                                                                   |
+|---------------------------------------|---------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
+| Engineer PA-09                        | Japanese made precisely engineered universal crimping tool          | [The Pi Hut](https://thepihut.com/products/universal-micro-crimping-pliers-1-0-to-1-9mm-size-contacts) |
+| Engineer PA-14                        | Japanese made professional grade wire strippers                     | [The Pi Hut](https://thepihut.com/products/engineer-pa-14-pro-wire-strippers-awg20-awg34)              |
+| Pinecil V2                            | Smart USB-C powered Mini Portable Soldering Iron                    | [Test Clips](https://testclips.co.uk/product/pinecil-smart-mini-portable-soldering-iron/)              |
+| Titanium Coated Step Drill Bit 4-22mm | A step drill bit is ideal to cut holes in the ABS plastic enclosure | [ToolStation](https://www.toolstation.com/titanium-coated-step-drill-bit/p78333)                       |
 
 ## Wiring
 ![Wiring Diagram](wiring.svg)
