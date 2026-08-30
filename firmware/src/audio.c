@@ -120,6 +120,11 @@ void audio_init(void) {
     gpio_set_dir(AUDIO_PIN_AMP_SD, GPIO_OUT);
     gpio_put(AUDIO_PIN_AMP_SD, 0);      /* amp held in shutdown until we play */
 #endif
+#if AUDIO_PIN_LEDS >= 0
+    gpio_init(AUDIO_PIN_LEDS);
+    gpio_set_dir(AUDIO_PIN_LEDS, GPIO_OUT);
+    gpio_put(AUDIO_PIN_LEDS, 0);        /* strips dark until we play */
+#endif
 
     uint offset = pio_add_program(pio, &i2s_out_program);
     pio_sm = pio_claim_unused_sm(pio, true);
@@ -153,6 +158,9 @@ void audio_play(const audio_clip_t *clip) {
     ready[0] = prepare(0);
     ready[1] = prepare(1);
 
+#if AUDIO_PIN_LEDS >= 0
+    gpio_put(AUDIO_PIN_LEDS, 1);        /* strips on for the length of the clip */
+#endif
 #if AUDIO_PIN_AMP_SD >= 0
     gpio_put(AUDIO_PIN_AMP_SD, 1);      /* un-mute before the first sample */
     sleep_ms(5);                        /* MAX98357A start-up time */
@@ -174,5 +182,8 @@ void audio_wait(void) {
 
 #if AUDIO_PIN_AMP_SD >= 0
     gpio_put(AUDIO_PIN_AMP_SD, 0);      /* mute: kills the idle hiss between clips */
+#endif
+#if AUDIO_PIN_LEDS >= 0
+    gpio_put(AUDIO_PIN_LEDS, 0);        /* strips off with the last sample */
 #endif
 }

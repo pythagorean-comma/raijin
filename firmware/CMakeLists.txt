@@ -1,10 +1,24 @@
+# == DO NOT EDIT THE FOLLOWING LINES for the Raspberry Pi Pico VS Code Extension to work ==
+if(WIN32)
+    set(USERHOME $ENV{USERPROFILE})
+else()
+    set(USERHOME $ENV{HOME})
+endif()
+set(sdkVersion 2.3.0)
+set(toolchainVersion 15_2_Rel1)
+set(picotoolVersion 2.3.0)
+set(picoVscode ${USERHOME}/.pico-sdk/cmake/pico-vscode.cmake)
+if (EXISTS ${picoVscode})
+    include(${picoVscode})
+endif()
+# ====================================================================================
 cmake_minimum_required(VERSION 3.13)
 
 set(PICO_BOARD pico2_w CACHE STRING "Board type")
 set(PICO_PLATFORM rp2350 CACHE STRING "Platform")
 
 include(pico_sdk_import.cmake)
-project(pico2w_audio C CXX ASM)
+project(raijin_firmware C CXX ASM)
 set(CMAKE_C_STANDARD 11)
 pico_sdk_init()
 
@@ -32,18 +46,18 @@ add_custom_command(
     VERBATIM
 )
 
-add_executable(firmware
+add_executable(raijin_firmware
     src/main.c
     src/audio.c
     ${GEN}/clips.c
     ${GEN}/clips.S
 )
 
-pico_generate_pio_header(firmware ${CMAKE_CURRENT_LIST_DIR}/src/i2s.pio)
+pico_generate_pio_header(raijin_firmware ${CMAKE_CURRENT_LIST_DIR}/src/i2s.pio)
 
-target_include_directories(firmware PRIVATE ${CMAKE_CURRENT_LIST_DIR}/src ${GEN})
-target_link_libraries(firmware pico_stdlib hardware_pio hardware_dma)
+target_include_directories(raijin_firmware PRIVATE ${CMAKE_CURRENT_LIST_DIR}/src ${GEN})
+target_link_libraries(raijin_firmware pico_stdlib hardware_pio hardware_dma)
 
-pico_enable_stdio_usb(firmware 1)
-pico_enable_stdio_uart(firmware 0)
-pico_add_extra_outputs(firmware)
+pico_enable_stdio_usb(raijin_firmware 1)
+pico_enable_stdio_uart(raijin_firmware 0)
+pico_add_extra_outputs(raijin_firmware)

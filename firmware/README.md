@@ -57,13 +57,18 @@ via `libopus` fixed-point gets 20:1 but wants a lot more code space and CPU.
 Leave `GAIN` floating for 9 dB. Pin assignments are `#define`s at the top of
 `src/audio.h`.
 
+`GP22` drives the LED strips' MOSFET module — high for the length of each clip,
+low between them, in step with the amp mute. The module is a low-side switch on
+the strips' negative rail and takes its logic supply from the Pico's 3V3; see
+`hardware/assembly.md` for the wiring.
+
 ## Build
 
 ```sh
 export PICO_SDK_PATH=/path/to/pico-sdk
 cmake -B build -DCMAKE_BUILD_TYPE=Release
 cmake --build build -j
-# -> build/firmware.uf2
+# -> build/raijin_firmware.uf2
 ```
 
 Drop your WAVs into `audio/` and rebuild. Any sample rate, mono or stereo,

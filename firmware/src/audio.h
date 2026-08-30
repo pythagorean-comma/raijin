@@ -14,6 +14,9 @@
 #ifndef AUDIO_PIN_AMP_SD
 #define AUDIO_PIN_AMP_SD 19      /* MAX98357A SD_MODE; -1 to disable */
 #endif
+#ifndef AUDIO_PIN_LEDS
+#define AUDIO_PIN_LEDS   22      /* MOSFET module signal, lit while a clip plays; -1 to disable */
+#endif
 
 void audio_init(void);
 
