@@ -1,4 +1,4 @@
-<svg viewBox="0 0 990 900" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Raijin wiring diagram: power bank, switch, supply WAGOs, Pico 2 W, MAX98357A amplifier, DFR0457 MOSFET module, LED WAGOs and three parallel LED strips">
+<svg viewBox="0 0 990 900" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Raijin wiring diagram: power bank, switch, supply WAGOs, Pico 2 W, MAX98357A amplifier, Mosfetti MOSFET switch and three LED strips, one per Mosfetti channel">
   <defs>
     <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
       <path d="M0,0 L10,5 L0,10 z" fill="#8a8378"></path>
@@ -55,7 +55,7 @@
   <text class="wl" x="34" y="348">(stripe = negative = GND)</text>
 
   <!-- BUS RAILS -->
-  <path class="pw" d="M212,218 L244,218 L244,555 L259,555 A7,7 0 0 1 273,555 L575,555"></path>
+  <path class="pw" d="M212,218 L244,218 L244,660 L259,660 A7,7 0 0 1 273,660 L310,660"></path>
   <path class="gnd" d="M212,276 L266,276"></path>
   <path class="gnd" d="M266,244 L266,705 L310,705"></path>
 
@@ -77,7 +77,7 @@
   <text class="sub" x="326" y="229">on a screw-terminal expansion board</text>
   <text class="pin" x="326" y="252">VSYS pin 39 · GND pin 38</text>
   <text class="pin" x="326" y="272">GP16 17 18 19 → amplifier</text>
-  <text class="pin" x="326" y="292">GP22 → MOSFET signal</text>
+  <text class="pin" x="326" y="292">GP20 21 22 → Mosfetti A B C</text>
 
   <!-- AMP -->
   <rect class="box" x="310" y="372" width="232" height="120" rx="8"></rect>
@@ -108,43 +108,38 @@
   <path class="aud" d="M542,430 L656,428"></path>
   <text class="wl" x="556" y="420">speaker + / −</text>
 
-  <!-- Pico Gravity cable -> MOSFET -->
+  <!-- Pico header leads -> Mosfetti -->
   <path class="sig" d="M542,300 L568,300 L568,422 A7,7 0 0 1 568,436 L568,548 A7,7 0 0 1 568,562 L568,598 L430,598 L430,624"></path>
-  <text class="wl" x="440" y="590">GP22 · 3V3(OUT) · GND</text>
+  <text class="wl" x="440" y="590">GP20 · GP21 · GP22 · GND</text>
 
-  <!-- MOSFET -->
+  <!-- MOSFETTI -->
   <rect class="box" x="310" y="624" width="210" height="130" rx="8"></rect>
-  <text class="ttl" x="326" y="652">MOSFET switch module</text>
-  <text class="sub" x="326" y="668">DFRobot DFR0457 · 3.3 V logic</text>
-  <text class="pin" x="326" y="692">VIN · GND · VOUT</text>
-  <text class="sub" x="326" y="714">Low side switch. The MOSFET</text>
-  <text class="sub" x="326" y="728">sits between VOUT and GND, so</text>
-  <text class="sub" x="326" y="742">VOUT is the switched negative.</text>
+  <text class="ttl" x="326" y="652">Mosfetti MOSFET switch</text>
+  <text class="sub" x="326" y="668">MonkMakes · 4 ch · 3.3 V logic</text>
+  <text class="pin" x="326" y="692">IN + · GND · out A to D</text>
+  <text class="sub" x="326" y="714">Low side switch. Channels A, B</text>
+  <text class="sub" x="326" y="728">and C take one strip each, as a</text>
+  <text class="sub" x="326" y="742">+ and a switched − per channel.</text>
 
-  <!-- LED + WAGO -->
-  <rect x="575" y="534" width="175" height="42" rx="8" fill="#fdeee6" stroke="#e0a184" stroke-width="1.4"></rect>
-  <text class="ttl" x="591" y="553">LED + WAGO</text>
-  <text class="sub" x="591" y="568">221-415 · 5 ways used</text>
-
-  <!-- LED - WAGO -->
-  <rect x="575" y="782" width="175" height="42" rx="8" fill="#eeece9" stroke="#a8a29a" stroke-width="1.4"></rect>
-  <text class="ttl" x="591" y="801">LED − WAGO</text>
-  <text class="sub" x="591" y="816">221-415 · 4 ways used</text>
-
-  <!-- LED + WAGO -> MOSFET VIN -->
-  <path class="pw" d="M610,576 L610,680 L520,680"></path>
-  <text class="wl" x="527" y="674">VIN</text>
-
-  <!-- MOSFET VOUT -> LED - WAGO -->
-  <path class="gnd" d="M520,730 L555,730 L555,803 L575,803"></path>
-  <text class="wl" x="527" y="724">VOUT</text>
-
-  <!-- MOSFET GND -> GND bus -->
+  <!-- Mosfetti input terminal from the supply buses -->
+  <text class="wl" x="272" y="654">IN +</text>
   <text class="wl" x="272" y="698">GND</text>
 
-  <!-- LED STRIPS, three in parallel -->
-  <text class="ttl" x="790" y="512">LED strips</text>
-  <text class="sub" x="790" y="528">3 × 150 mm COB, in parallel</text>
+  <!-- Channel positives, one straight to each strip -->
+  <path class="pw" d="M520,644 L600,644 L600,510 L937,510 L937,600"></path>
+  <path class="pw" d="M520,664 L620,664 L620,525 L885,525 L885,600"></path>
+  <path class="pw" d="M520,684 L640,684 L640,540 L833,540 L833,600"></path>
+  <text class="wl" x="527" y="640">C +</text>
+  <text class="wl" x="527" y="660">B +</text>
+  <text class="wl" x="527" y="680">A +</text>
+
+  <!-- Channel switched negatives, one straight to each strip -->
+  <path class="gnd" d="M520,704 L640,704 L640,790 L833,790 L833,760"></path>
+  <path class="gnd" d="M520,724 L620,724 L620,805 L885,805 L885,760"></path>
+  <path class="gnd" d="M520,744 L600,744 L600,820 L937,820 L937,760"></path>
+  <text class="wl" x="527" y="700">A −</text>
+  <text class="wl" x="527" y="720">B −</text>
+  <text class="wl" x="527" y="740">C −</text>
 
   <rect x="820" y="600" width="26" height="160" rx="6" fill="#f6d9a8" stroke="#d9a441"></rect>
   <rect x="872" y="600" width="26" height="160" rx="6" fill="#f6d9a8" stroke="#d9a441"></rect>
@@ -157,18 +152,11 @@
   <text class="mark" x="885" y="750" text-anchor="middle">−</text>
   <text class="mark" x="937" y="750" text-anchor="middle">−</text>
 
-  <path class="pw" d="M750,555 L937,555"></path>
-  <path class="pw" d="M833,555 L833,600"></path>
-  <path class="pw" d="M885,555 L885,600"></path>
-  <path class="pw" d="M937,555 L937,600"></path>
+  <text class="ttl" x="830" y="850">LED strips</text>
+  <text class="sub" x="830" y="864">3 × 150 mm COB</text>
 
-  <path class="gnd" d="M750,803 L937,803"></path>
-  <path class="gnd" d="M833,760 L833,803"></path>
-  <path class="gnd" d="M885,760 L885,803"></path>
-  <path class="gnd" d="M937,760 L937,803"></path>
-
-  <text class="warn" x="575" y="847">The LED − WAGO is not a ground.</text>
-  <text class="warn" x="575" y="861">Never join it to the GND WAGO.</text>
+  <text class="warn" x="560" y="850">A strip negative goes only to its own</text>
+  <text class="warn" x="560" y="864">channel − terminal, never the GND WAGO.</text>
 
   <!-- LEGEND -->
   <path class="pw" d="M40,884 L72,884"></path>   <text class="wl" x="80" y="888">+5 V</text>

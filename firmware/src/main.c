@@ -8,10 +8,35 @@
 
 #define IDLE_MS 30000       /* gap between clips */
 
+/* Bench aid while the LED wiring is debugged; audio stays muted throughout.
+ *   0 = normal operation
+ *   1 = hold the strips on
+ *   2 = square-wave the LED pins, 3 s high then 3 s low, for probing the module */
+#define LED_DEBUG 2
+
 int main(void) {
     stdio_init_all();
     audio_init();
     audio_set_volume(200);          /* ~78% of unity */
+
+#if LED_DEBUG && AUDIO_LED_PINS
+    /* audio_init() has already left the amp muted, so none of this makes a sound. */
+#if LED_DEBUG == 2
+    printf("LED debug: GP20/21/22 square wave, 3 s high / 3 s low\n");
+    while (true) {
+        gpio_set_mask(AUDIO_LED_PINS);
+        printf("channels high\n");
+        sleep_ms(3000);
+        gpio_clr_mask(AUDIO_LED_PINS);
+        printf("channels low\n");
+        sleep_ms(3000);
+    }
+#else
+    printf("LED debug: strips held on\n");
+    gpio_set_mask(AUDIO_LED_PINS);
+    while (true) tight_loop_contents();
+#endif
+#endif
 
     uint32_t n = 0;
     while (true) {

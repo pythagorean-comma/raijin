@@ -8,17 +8,17 @@
 | Freenove FNK0081 Breakout Board for Pico             | There are many breakout boards to choose from but this one gave the best documentation                                                                                                                                                                                                                                                                                                                                                                                                                  | 1        | [Freenove Store](https://store.freenove.com/products/fnk0081)                                                  |
 | Adafruit ADA3006 MAX98357A amplifier                 |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | 1        | [The Pi Hut](https://thepihut.com/products/adafruit-i2s-3w-class-d-amplifier-breakout-max98357a)               |
 | Speaker, 4 Ω 3 W, flying leads                       | The speaker will connect to the amplifier via a WAGO connector so be sure to get a speaker with cables that have bare ends                                                                                                                                                                                                                                                                                                                                                                              | 1        | [The Pi Hut](https://thepihut.com/products/mono-enclosed-speaker-with-plain-wires-3w-4-ohm)                    |
-| DFRobot DFR0457 Gravity MOSFET Power Controller      | The Pico has the control logic but it is the MOSFET controller which does the switching                                                                                                                                                                                                                                                                                                                                                                                                                 | 1        | [The Pi Hut](https://thepihut.com/products/gravity-mosfet-power-controller)                                    |
+| MonkMakes Mosfetti 4-channel MOSFET driver           | The Pico has the control logic but it is the Mosfetti which does the switching. Three of its four channels are used, one per LED strip, which is what lets the strips be wired straight to it with no connectors in between. It arrives as a kit: the surface mount parts are already fitted, but you solder on the five screw terminals and the 5-way pin header yourself. Its gates are driven straight from a GPIO pin, so a 3.3 V output switches it fully.                                                                                                                                              | 1        | [The Pi Hut](https://thepihut.com/products/mosfetti-4-channel-mosfet-driver)                                   |
 | PAUTIX 5 V COB strip, 2 m                            | We cut this into three 150 mm strips that sit side by side on the enclosure lid. The strip cuts every 12.5 mm, so 150 mm lands exactly on a mark. That uses 450 mm of the 2 m reel and leaves plenty spare for mistakes. The whole reel wants 5 V at 2 A, so about 1 A per metre, which puts the three strips together at 0.45 A. That is the figure used throughout the wiring tables.                                                                                                                 | 1        | [Amazon](https://www.amazon.co.uk/dp/B08XBW48K9?th=1)                                                          |
 | USB-A male to bare-wire pigtail                      | In theory you can cut the end off a spare USB A cable you may have to hand but not all cables have just red and black so you are probably better off buying one                                                                                                                                                                                                                                                                                                                                         | 1        | [Amazon](https://www.amazon.co.uk/dp/B0CWNQB19C)                                                               |
-| WAGO 221-415 (5-way)                                 | A 5-way WAGO connector securely joins up to 5 wires together. This lets you feed power from one main wire into up to four outgoing wires. We use four of them. Two are the supply buses, one to distribute power and one as a common ground. The other two carry the switched supply out to the three LED strips. The positive one ends up full, the negative one has a way spare                                                                                                                       | 4        | [CPC](https://cpc.farnell.com/wago/221-415/compact-lever-connector-5-way/dp/CN20137)                           |
+| WAGO 221-415 (5-way)                                 | A 5-way WAGO connector securely joins up to 5 wires together. This lets you feed power from one main wire into up to four outgoing wires. We use two of them as the supply buses, one to distribute power and one as a common ground. Both end up full. The LED strips need none, as each one wires straight into its own channel on the Mosfetti                                                                                                                                                      | 2        | [CPC](https://cpc.farnell.com/wago/221-415/compact-lever-connector-5-way/dp/CN20137)                           |
 | WAGO 221-412 (2-way)                                 | A 2-way WAGO connector securely joins 2 wires together. Two of them join the speaker leads to the cables from the amplifier, so the speaker can be parted from the board without cutting anything. The third joins the pigtail to the switch lead. Add more if you use them to break up long runs                                                                                                                                                                                                       | 3        | [CPC](https://cpc.farnell.com/wago/221-412/compact-lever-connector-2-way/dp/CN20135)                           |
 | Belkin BoostCharge 10K (BPB011)                      | A 10000mAh power bank should give 90hrs of continuous use before needing recharged                                                                                                                                                                                                                                                                                                                                                                                                                      | 1        | [Belkin](https://www.belkin.com/uk/p/power-bank-10k/BPB011btBK.html)                                           |
 | Panasonic EEUFR1A102L, 1000 µF 10 V                  | When the strips switch on and a beep starts at the same moment, the box asks for about 1.4 A in an instant. The power bank and the cable to it cannot respond that fast, so the 5 V rail dips. A big enough dip resets the Pico. The capacitor sits next to the load with that energy already stored, and supplies the first few milliseconds itself while the bank catches up. 1000 µF is sized for that surge. The 10 V part is headroom. On a 5 V rail you want a capacitor rated at roughly double. | 1        | [CPC](https://cpc.farnell.com/panasonic/eeufr1a102l/capacitor-radial-10v-1000uf/dp/CA07459)                    |
 | 1N5817 Schottky                                      | It lets you plug the micro-USB in without the two power sources fighting. You can leave the box switched on and plug in a laptop to reflash firmware.                                                                                                                                                                                                                                                                                                                                                   | 1        | [CPC](https://cpc.farnell.com/taiwan-semiconductor/1n5817/schottky-rectifier-1a-20v-do-204al/dp/SC21533)       |
 | Power on/off toggle switch                           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | 1        | [The Pi Hut](https://thepihut.com/products/illuminated-toggle-switch-with-cover-red)                           |
 | 6.3 mm insulated spade crimps                        | Needed to connect to the toggle switch assuming you buy the type linked to above                                                                                                                                                                                                                                                                                                                                                                                                                        | 3        | [The Pi Hut](https://thepihut.com/products/spade-quick-connector-kit-6-3mm-4-8mm-2-8mm)                        |
-| Hookup wire, 16/0.2 mm (0.5 mm², approx 20 AWG)      | The thicker of the two. Rated about 3 A, and needed anywhere the full box current flows: the switch to the +5 V bus, the two LED rails, and all three of the MOSFET module's power terminals. Also both wires you crimp spades onto at the switch, because a 6.3 mm spade will not close on anything thinner. Buy two or three colours, the link is one of them                                                                                                                                         |          | [CPC](https://cpc.farnell.com/concordia-technologies/ew16-0-2blu-10m/equipment-wire-16-0-20mm-blue/dp/CB19941) |
+| Hookup wire, 16/0.2 mm (0.5 mm², approx 20 AWG)      | The thicker of the two. Rated about 3 A, and needed anywhere the full box current flows: the switch to the +5 V bus, and the Mosfetti's input pair. It is used for the six runs out to the LED strips as well, where the current is far lower, but the extra size makes for a sturdier joint at the strip pads. Also both wires you crimp spades onto at the switch, because a 6.3 mm spade will not close on anything thinner. Buy two or three colours, the link is one of them                                                                                                                                         |          | [CPC](https://cpc.farnell.com/concordia-technologies/ew16-0-2blu-10m/equipment-wire-16-0-20mm-blue/dp/CB19941) |
 | Hookup wire, 7/0.2 mm (0.22 mm², approx 24 AWG)      | The thinner of the two. Rated about 1.4 A, which is fine for the signals and for the amplifier feed, but not for the runs above. Also the only one of the two that will fit a Dupont terminal. Again, two or three colours                                                                                                                                                                                                                                                                              |          | [CPC](https://cpc.farnell.com/concordia-technologies/ew7-0-2blk10m/equipment-wire-7-0-20mm-black/dp/CB19933)   |
 | Bootlace ferrules and crimper                        | Not strictly necessary but it can make it easier to secure the wire to the screw terminals                                                                                                                                                                                                                                                                                                                                                                                                              |          |                                                                                                                |
 | Hammond 1556GAWH ABS box                             | This is the enclosue into which we will mount all the components and keep them out of sight. The outside of the lid will have the led strips.                                                                                                                                                                                                                                                                                                                                                           | 1        | [RS Components](https://uk.rs-online.com/web/p/general-purpose-enclosures/2777586)                             |
@@ -41,7 +41,7 @@ some very basic soldering. there are plenty of options on the market. These are 
 ## Wiring
 ![Wiring Diagram](wiring.svg)
 
-Thirty connections in all: fourteen for power, six for signal and ten for the outputs. Work down the lists and the box is wired.
+Twenty-nine connections in all: fourteen for power, seven for signal and eight for the outputs. Work down the lists and the box is wired.
 
 ### Wiring the power bank to the switch
 
@@ -78,8 +78,8 @@ Fourteen connections. Work down the list and the power side of the box is wired.
 | P10 | GND WAGO                                | Pico GND, physical pin 38               | 7/0.2            | Bare into the WAGO, bare into the GND screw terminal. The Pico draws about 130 mA.                                                                               |
 | P11 | +5 V WAGO                               | MAX98357A VIN                           | 7/0.2            | Bare into the WAGO, Dupont onto the pin. Do not use 16/0.2 here, as a Dupont terminal will not close over 0.5 mm². At 0.7 A over 150 mm, 7/0.2 drops only 16 mV. |
 | P12 | GND WAGO                                | MAX98357A GND                           | 7/0.2            | Same as P11. The return carries the same current as the feed.                                                                                                    |
-| P13 | +5 V WAGO                               | LED + WAGO                              | 16/0.2           | Bare into both. This one wire feeds all three strips and the module's VIN, 0.45 A.                                                                               |
-| P14 | GND WAGO                                | MOSFET module GND                       | 16/0.2           | Bare into the WAGO, bare into the screw terminal. The return path for the strips.                                                                                |
+| P13 | +5 V WAGO                               | Mosfetti input terminal, + side         | 16/0.2           | Bare into the WAGO, bare into the screw terminal. This one wire feeds all three strips, 0.45 A.                                                                  |
+| P14 | GND WAGO                                | Mosfetti input terminal, GND side       | 16/0.2           | Bare into the WAGO, bare into the screw terminal. The return path for the strips.                                                                                |
 
 #### What goes in each WAGO
 
@@ -91,7 +91,7 @@ These are the two supply buses. The two LED WAGOs are separate and are listed wi
 2. Capacitor + leg (P6)
 3. Diode leg feeding the Pico (P8)
 4. Amplifier VIN (P11)
-5. Feed to the LED + WAGO (P13)
+5. Mosfetti input + (P13)
 
 **Ground bus, 5-way, all 5 ways used**
 
@@ -99,40 +99,45 @@ These are the two supply buses. The two LED WAGOs are separate and are listed wi
 2. Capacitor − leg (P7)
 3. Pico GND (P10)
 4. Amplifier GND (P12)
-5. MOSFET GND (P14)
+5. Mosfetti input GND (P14)
 
 Low current grounds do not need to come here at all. The switch lamp goes to a spare GND screw terminal on the Pico board instead (P4), which is why ground still fits in one connector.
 
 ### Signal connections
 
-Six connections. These carry no real current, so 7/0.2 is used throughout.
+Seven connections. These carry no real current, so 7/0.2 is used throughout.
 
-| #  | From                   | To                                   | Wire           | How                                                                                                          |
-|----|------------------------|--------------------------------------|----------------|--------------------------------------------------------------------------------------------------------------|
-| S1 | Pico GP16 (pin 21)     | MAX98357A BCLK                       | 7/0.2          | Screw terminal at the Pico, Dupont at the amplifier.                                                         |
-| S2 | Pico GP17 (pin 22)     | MAX98357A LRC                        | 7/0.2          | Same as S1.                                                                                                  |
-| S3 | Pico GP18 (pin 24)     | MAX98357A DIN                        | 7/0.2          | Same as S1.                                                                                                  |
-| S4 | Pico GP22 (pin 29)     | MOSFET module signal (green or blue) | Supplied cable | Use the module's own 3-pin Gravity cable. Cut the housing off the far end, see below.                        |
-| S5 | Pico 3V3(OUT) (pin 36) | MOSFET module VCC (red)              | Supplied cable | Same cable. Take this from the Pico's 3.3 V output, not from the 5 V bus.                                    |
-| S6 | Pico GND (pin 28)      | MOSFET module logic GND (black)      | Supplied cable | Same cable. Not optional. This is the return for the module's own logic supply, nothing switches without it. |
+| #  | From                   | To                          | Wire           | How                                                                                                     |
+|----|------------------------|-----------------------------|----------------|-----------------------------------------------------------------------------------------------------------|
+| S1 | Pico GP16 (pin 21)     | MAX98357A BCLK              | 7/0.2          | Screw terminal at the Pico, Dupont at the amplifier.                                                    |
+| S2 | Pico GP17 (pin 22)     | MAX98357A LRC               | 7/0.2          | Same as S1.                                                                                             |
+| S3 | Pico GP18 (pin 24)     | MAX98357A DIN               | 7/0.2          | Same as S1.                                                                                             |
+| S4 | Pico GP20 (pin 26)     | Mosfetti header pin A       | 7/0.2          | Screw terminal at the Pico, female Dupont onto the header pin. See below.                               |
+| S5 | Pico GP21 (pin 27)     | Mosfetti header pin B       | 7/0.2          | Same as S4.                                                                                             |
+| S6 | Pico GP22 (pin 29)     | Mosfetti header pin C       | 7/0.2          | Same as S4.                                                                                             |
+| S7 | Pico GND (pin 28)      | Mosfetti header pin GND     | 7/0.2          | Same as S4. Not optional. Without it the Mosfetti has no reference for the control signals.             |
 
-#### The Gravity cable
+#### The Mosfetti header
 
-S4, S5 and S6 are all one cable, not three separate wires. The MOSFET module comes with a 3-pin Gravity lead. Leave the PH2.0 plug on the module end, as it is a proper latching connector and worth keeping.
+The Mosfetti has one 5-way pin header, marked A, B, C, D and GND. A to D each control the matching output channel, and the fifth pin is the ground reference back to the Pico. There is no separate logic supply to wire: each channel's gate is driven straight from its control pin, which is why a 3.3 V GPIO output is enough.
 
-The other end will not plug into anything. It carries a 3-way Dupont housing, and the three pins are not in a row. 3V3(OUT) exists only at pin 36, and its neighbours are ADC_VREF, 3V3_EN and a ground that is already taken, so no run of three adjacent pins will give you a signal, 3.3 V and a ground. The Pico end of this build is screw terminals in any case.
+Channels A, B and C each drive one strip. D is left unconnected.
 
-So cut the housing off, strip the three wires, optionally fit a ferrule to each and screw them in by colour:
+The header pins are male, and the Pico end of this build is screw terminals, so nothing plugs straight in at both ends. Easiest is a female-to-male jumper lead: push the female end onto the header pin, cut the male pin off the other end, strip it and screw it into the Pico terminal. Four leads, for S4 to S7. Alternatively crimp a female Dupont onto a length of 7/0.2.
 
-1. Green or blue is the signal, to GP22 (pin 29)
-2. Black is ground, to GND (pin 28)
-3. Red is VCC, to 3V3(OUT) (pin 36)
+Pins 26, 27, 28 and 29 are four consecutive terminals on the Pico board, and they give you exactly what is needed: GP20, GP21, a ground and GP22. Keep the leads in that order and there is nothing to miscount.
 
-The first two are adjacent terminals. The red wire runs about seven terminals along to pin 36.
+GP20, GP21 and GP22 are the free digital pins nearest that corner. GP26, GP27 and GP28 are closer still, but they are the only three analogue capable pins on the board and there is no reason to spend them on digital outputs.
 
-GP22 is the nearest pin to 3V3(OUT) with no second job. GP26, GP27 and GP28 are closer, but they are the only three analogue capable pins on the board and there is no reason to spend one on a digital output.
+Count carefully. Pin 30, right next to GP22, is RUN, and a wire in there holds the Pico in reset.
 
-Count carefully at both ends. Pin 30, right next to GP22, is RUN, and a wire in there holds the Pico in reset. Pin 35, right next to 3V3(OUT), is ADC_VREF.
+#### Assembling the Mosfetti
+
+The board arrives with all the surface mount parts already soldered. You fit the through-hole parts yourself: five 2-way screw terminals and the 5-way pin header.
+
+Solder the header pins first, as they are the shortest. Put the header in place, flip the board onto its back and solder from underneath. A piece of adhesive putty holds the pins square until the first joint is made.
+
+Then the screw terminals, making sure the opening each wire goes into faces outwards from the board. Only two of the five are actually used in this build, the input terminal and channel A, so you can fit just those if you prefer.
 
 
 #### Pico pins used
@@ -145,9 +150,10 @@ Worth checking against your board before you start, so nothing clashes.
 | 21  | GP16     | Amplifier BCLK (S1)                |
 | 22  | GP17     | Amplifier LRC (S2)                 |
 | 24  | GP18     | Amplifier DIN (S3)                 |
-| 28  | GND      | MOSFET module ground (S6)          |
-| 29  | GP22     | MOSFET module signal (S4)          |
-| 36  | 3V3(OUT) | MOSFET module VCC (S5)             |
+| 26  | GP20     | Mosfetti header A (S4)             |
+| 27  | GP21     | Mosfetti header B (S5)             |
+| 28  | GND      | Mosfetti header GND (S7)           |
+| 29  | GP22     | Mosfetti header C (S6)             |
 | 38  | GND      | Main ground from the GND bus (P10) |
 | 39  | VSYS     | Main supply through the diode (P9) |
 
@@ -155,59 +161,41 @@ Pin 3 is a plain ground and sits near the switch. Pin 8 does the job just as wel
 
 ### Output connections
 
-Ten connections. This is everything that leaves the box: the speaker and the three LED strips.
+Eight connections. This is everything that leaves the box: the speaker and the three LED strips.
 
-| #   | From                | To                       | Wire          | How                                                                                                                                      |
-|-----|---------------------|--------------------------|---------------|------------------------------------------------------------------------------------------------------------------------------------------|
-| O1  | MAX98357A speaker + | 2-way WAGO, then speaker | Speaker's own | Strip 6 mm, into the 3.5 mm screw terminal, tighten. If you need to extend, use 16/0.2. This pair carries close to 0.9 A at full output. |
-| O2  | MAX98357A speaker − | Same again, other pole   | Speaker's own | Polarity does not matter with a single speaker. Swapping the pair only inverts the waveform.                                             |
-| O3  | LED + WAGO          | MOSFET VIN               | 16/0.2        | Bare into the WAGO, bare into the screw terminal. Carries almost no current, but without it the module cannot switch at all.             |
-| O4  | MOSFET VOUT         | LED − WAGO               | 16/0.2        | Bare into the screw terminal, bare into the WAGO. This is the switched side and carries the full 0.45 A.                                 |
-| O5  | LED + WAGO          | Strip 1, + pad           | 16/0.2        | Solder to the pad, sleeve the joint in heatshrink.                                                                                       |
-| O6  | LED − WAGO          | Strip 1, − pad           | 16/0.2        | Same as O5.                                                                                                                              |
-| O7  | LED + WAGO          | Strip 2, + pad           | 16/0.2        | Same as O5.                                                                                                                              |
-| O8  | LED − WAGO          | Strip 2, − pad           | 16/0.2        | Same as O5.                                                                                                                              |
-| O9  | LED + WAGO          | Strip 3, + pad           | 16/0.2        | Same as O5.                                                                                                                              |
-| O10 | LED − WAGO          | Strip 3, − pad           | 16/0.2        | Same as O5.                                                                                                                              |
+| #   | From                  | To                       | Wire          | How                                                                                                                                      |
+|-----|-----------------------|--------------------------|---------------|------------------------------------------------------------------------------------------------------------------------------------------|
+| O1  | MAX98357A speaker +   | 2-way WAGO, then speaker | Speaker's own | Strip 6 mm, into the 3.5 mm screw terminal, tighten. If you need to extend, use 16/0.2. This pair carries close to 0.9 A at full output. |
+| O2  | MAX98357A speaker −   | Same again, other pole   | Speaker's own | Polarity does not matter with a single speaker. Swapping the pair only inverts the waveform.                                             |
+| O3  | Mosfetti channel A, + | Strip 1, + pad           | 16/0.2        | Bare into the screw terminal, solder to the pad and sleeve the joint in heatshrink. 0.15 A per strip.                                    |
+| O4  | Mosfetti channel A, − | Strip 1, − pad           | 16/0.2        | Same as O3. This is the switched side.                                                                                                   |
+| O5  | Mosfetti channel B, + | Strip 2, + pad           | 16/0.2        | Same as O3.                                                                                                                              |
+| O6  | Mosfetti channel B, − | Strip 2, − pad           | 16/0.2        | Same as O4.                                                                                                                              |
+| O7  | Mosfetti channel C, + | Strip 3, + pad           | 16/0.2        | Same as O3.                                                                                                                              |
+| O8  | Mosfetti channel C, − | Strip 3, − pad           | 16/0.2        | Same as O4.                                                                                                                              |
 
-#### The three strips run in parallel
+#### One strip per channel
 
-Each strip is 150 mm, and each one gets its own pair of wires back to the box. Nothing joins one strip to the next.
+Each strip is 150 mm and gets its own pair of wires straight back to its own channel terminal. Nothing joins one strip to the next, and there is no shared rail between them.
 
-#### How the module is actually wired
+Channel D is spare. A fourth strip would need only the two wires, with a fourth GPIO added to the firmware.
 
-The module does not have a pair of output terminals. Its power side has three, and they are marked VIN, GND and VOUT.
+#### How the Mosfetti is actually wired
 
-- **VIN** is the positive rail coming in. It also feeds the gate drive, so it must be connected or the MOSFET can never turn on. It carries almost no current itself.
-- **GND** is the negative rail going back to the power bank.
-- **VOUT** is the switched terminal. The MOSFET sits between VOUT and GND, and that is the only break in the circuit.
+The board has five 2-way screw terminals. One is the input, on its own at the corner nearest the header, and the other four are the outputs, labelled A to D down the opposite edge.
 
-So the strips do not hang across a pair of outputs. They hang between the positive rail and VOUT. Their positives sit in the same connector as VIN because they are the same rail, and their negatives go to VOUT.
+- The **input** terminal takes the supply: + on one side, GND on the other. Everything the board switches is fed through it, so it carries the full 0.45 A.
+- Each **output** terminal gives you a **+** and a switched **−**. The + is joined internally to the input +, and the − is the drain of that channel's MOSFET. The load goes straight across the two.
 
-Follow the current round once and it is obvious. Out of the +5 V bus, into the LED + WAGO, out to a strip, through its LEDs, back on its negative, into the LED − WAGO, into VOUT, through the MOSFET, out of GND, into the GND WAGO, home to the power bank.
+So each channel is a low side switch: the MOSFET sits between that channel's − terminal and GND, and that is the only break in the circuit. Nothing switches on the positive side.
 
-#### The two LED WAGOs
+Follow the current round once and it is obvious. Out of the +5 V bus, into the Mosfetti input +, across to channel A's + terminal, out to strip 1, through its LEDs, back on its negative into channel A's − terminal, through the MOSFET, out of the input GND, into the GND WAGO, home to the power bank. Channels B and C do the same for strips 2 and 3.
 
-These are separate from the two supply buses and must not be confused with them.
+Because each strip has its own pair of terminals, the two LED WAGOs this build used to need have gone. There is no shared strip rail to get wrong.
 
-**LED + WAGO, 5-way, all 5 used**
+#### A strip negative is not a ground
 
-1. Feed from the +5 V bus (P13)
-2. To MOSFET VIN (O3)
-3. Strip 1 positive (O5)
-4. Strip 2 positive (O7)
-5. Strip 3 positive (O9)
-
-**LED − WAGO, 5-way, 4 ways used**
-
-1. To MOSFET VOUT (O4)
-2. Strip 1 negative (O6)
-3. Strip 2 negative (O8)
-4. Strip 3 negative (O10)
-
-The LED − WAGO is not a ground. It only sits near 0 V while the strips are lit. Never join it to the GND WAGO. If a strip negative reaches ground by any other route it skips the MOSFET entirely, and that strip lights the moment you flip the switch and never flashes.
-
-WAGO do not make a 4-way in this range, so both of these are 221-415. The positive one is full. The spare way on the negative one is handy for a meter probe, but it will not get you a fourth strip, because a fourth strip needs a hole on both rails.
+A strip's negative goes to its own channel's − terminal and nowhere else. It only sits near 0 V while that strip is lit. Never put one in the GND WAGO. If a strip negative reaches ground by any other route it skips the MOSFET entirely, and that strip lights the moment you flip the switch and never flashes.
 
 #### Solder the strip leads, do not use clips
 

@@ -57,10 +57,11 @@ via `libopus` fixed-point gets 20:1 but wants a lot more code space and CPU.
 Leave `GAIN` floating for 9 dB. Pin assignments are `#define`s at the top of
 `src/audio.h`.
 
-`GP22` drives the LED strips' MOSFET module — high for the length of each clip,
-low between them, in step with the amp mute. The module is a low-side switch on
-the strips' negative rail and takes its logic supply from the Pico's 3V3; see
-`hardware/assembly.md` for the wiring.
+`GP20`, `GP21` and `GP22` drive channels A, B and C of a MonkMakes Mosfetti, one
+LED strip each. All three go high together for the length of each clip and low
+between them, in step with the amp mute. Each channel is a low-side switch on its
+own strip's negative; the gates are driven straight from the GPIOs, so no logic
+supply is needed. See `hardware/assembly.md` for the wiring.
 
 ## Build
 

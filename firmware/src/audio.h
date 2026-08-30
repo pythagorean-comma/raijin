@@ -14,8 +14,10 @@
 #ifndef AUDIO_PIN_AMP_SD
 #define AUDIO_PIN_AMP_SD 19      /* MAX98357A SD_MODE; -1 to disable */
 #endif
-#ifndef AUDIO_PIN_LEDS
-#define AUDIO_PIN_LEDS   22      /* MOSFET module signal, lit while a clip plays; -1 to disable */
+/* Mosfetti control pins A, B and C -- GP20, GP21 and GP22, one LED strip each.
+ * All three are lit together for the length of a clip. Set to 0 to disable. */
+#ifndef AUDIO_LED_PINS
+#define AUDIO_LED_PINS   ((1u << 20) | (1u << 21) | (1u << 22))
 #endif
 
 void audio_init(void);
