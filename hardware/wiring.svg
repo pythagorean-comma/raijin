@@ -35,7 +35,7 @@
 
   <rect class="box" x="30" y="126" width="182" height="44" rx="8"></rect>
   <text class="ttl" x="46" y="145">Master power switch</text>
-  <text class="sub" x="46" y="161">6.3 mm spades, in the red wire</text>
+  <text class="sub" x="46" y="161">2.8 mm tabs, in the red wire</text>
 
   <path class="thin" d="M121,170 L121,194" marker-end="url(#ar)"></path>
 
