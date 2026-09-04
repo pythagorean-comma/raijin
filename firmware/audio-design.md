@@ -56,11 +56,14 @@ via `libopus` fixed-point gets 20:1 but wants a lot more code space and CPU.
 Leave `GAIN` floating for 9 dB. Pin assignments are `#define`s at the top of
 `src/audio.h`.
 
-`GP20`, `GP21` and `GP22` drive channels A, B and C of a MonkMakes Mosfetti, one
-LED strip each. All three go high together for the length of each clip and low
-between them, in step with the amp mute. Each channel is a low-side switch on its
-own strip's negative; the gates are driven straight from the GPIOs, so no logic
-supply is needed. See `hardware/assembly.md` for the wiring.
+`GP22` drives the `In` pin of an Adafruit MOSFET driver, which switches all three
+LED strips together. It goes high for the length of each clip and low between
+them, in step with the amp mute. The driver is a low-side switch on the strips'
+negative rail, and its gate is driven straight from the GPIO, so there is no
+logic supply to wire. See `hardware/assembly.md` for the wiring.
+
+`AUDIO_LED_PINS` is a mask rather than a single pin number, so driving more than
+one output takes only another bit.
 
 
 ## How it works
