@@ -173,13 +173,23 @@ Eight connections. This is everything that leaves the box: the speaker and the t
 
 #### The strips are chained, and run in parallel
 
-One pair of wires leaves the driver and lands on strip 1. Short links then carry + and − along to strip 2, and again to strip 3. The three strips still sit side by side on the lid.
+One pair of wires leaves the driver and lands on strip 1. Short links then carry + and − along to strip 2, and again to strip 3. Each strip is simply an extension of the one before it.
 
 Chained is not the same as in series. Every strip sees the same 5 V, because + joins + and − joins −. Wiring them in true series would put about 1.7 V across each and none of them would light.
 
 Strip 1's pads carry the whole 0.45 A, because strips 2 and 3 draw through them. That is well inside 16/0.2, but it does make strip 1's two joints the ones worth getting right.
 
 Only one pair of wires now leaves the box for the LEDs, which is why the two LED WAGOs this build used to need have gone.
+
+#### Lay the strips head to tail
+
+The three sit side by side on the lid, but each one runs in the **opposite direction** to its neighbour. Strip 1 runs one way, strip 2 back the other, strip 3 the same way as strip 1.
+
+That is not cosmetic. Laying them head to tail puts the end you are joining from right next to the end you are joining to, so every link is a short hop across the gap. Run all three the same way and you have to carry each link the full 150 mm length of a strip to reach the next one's input end.
+
+Strip 1 is fed at its free end, links to strip 2 at the other, strip 2 links to strip 3 back at the first end, and strip 3's remaining end is left unconnected.
+
+**The catch.** Because each strip is turned round relative to its neighbour, the + and − pads do not line up across the gap. The + pad of one faces the − pad of the other, so the two link wires cross. That is correct and expected. Go by the printed markings on each strip, never by which side the pad happens to sit on.
 
 #### How the driver is wired
 
@@ -209,7 +219,11 @@ Solderless clips are the least reliable part of any strip build, and yours will 
 
 #### Watch the polarity
 
-The strip prints + and − along its length. Check the marking before you solder, on all three. The speaker pair (O1 and O2) is the only place in the whole build where polarity does not matter.
+The strip prints + and − along its length. Check the marking before you solder, on all three, and check it again at every joint.
+
+This matters more here than in most builds, because the head to tail layout turns each strip round relative to its neighbour. The pads do not line up, the link wires cross, and the side a pad sits on tells you nothing. Only the printing does. Get one link the wrong way round and you short the driver's output straight across the supply.
+
+The speaker pair (O1 and O2) is the only place in the whole build where polarity does not matter.
 
 #### The lid split
 

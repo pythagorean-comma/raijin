@@ -148,8 +148,9 @@
   <text class="mark" x="885" y="734" text-anchor="middle">−</text>
   <text class="mark" x="937" y="734" text-anchor="middle">−</text>
 
-  <text class="ttl" x="830" y="850">LED strips</text>
-  <text class="sub" x="830" y="864">3 × 150 mm COB, chained</text>
+  <text class="ttl" x="830" y="836">LED strips</text>
+  <text class="sub" x="830" y="850">3 × 150 mm COB, chained</text>
+  <text class="sub" x="830" y="864">and laid head to tail</text>
 
   <text class="warn" x="540" y="850">The strip negatives go only to the driver's</text>
   <text class="warn" x="540" y="864">− terminal, never the GND WAGO.</text>
