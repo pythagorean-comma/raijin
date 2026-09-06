@@ -6,6 +6,19 @@ simultaneously, at intervals of a few seconds. It is built around the
 available microcontroller board. This build uses the Wi-Fi variant, the Pico 2 W. The firmware should
 also run on the original Pico with a two-line build change, though that has not been tested.
 
+<p>
+  <img src="media/raijin-face.jpg" width="450"
+       alt="The lid of the white plastic enclosure, seen from above. Three short COB LED strips are
+            taped side by side across it, wired together at alternate ends, with a small round
+            speaker grille above them.">
+  <img src="media/raijin-side.jpg" width="260"
+       alt="The side of the enclosure. A stainless steel push button sits at the top, a small capped
+            port in the middle, and a larger capped port below it.">
+</p>
+
+The lid carries the three LED strips and the speaker. The side has the on/off button, a micro-USB
+port for flashing the Pico, and a USB-C port for charging the power bank without opening the box.
+
 It is an implementation of the training device described in Rowland, Bushnell, Duncan and Stein,
 "Ameliorating Hemianopia with Multisensory Training", *Journal of Neuroscience* 43(6):1018-1026
 (2023) — [paper](https://doi.org/10.1523/JNEUROSCI.0962-22.2022),

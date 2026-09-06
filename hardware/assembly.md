@@ -48,6 +48,12 @@ some very basic soldering. There are plenty of options on the market. These are 
 
 Twenty-five connections in all: thirteen for power, four for signal and eight for the outputs. Work down the lists and the box is wired.
 
+This is a finished build, for reference — the diagram above is what to follow, as a photograph cannot
+be worked through connection by connection.
+
+![The opened enclosure, lid above and base below. The lid holds the blue power bank, the black enclosed speaker, the two panel-mount port cables and a WAGO connector at each side. The base holds the Pico on its breakout board in the centre, the amplifier to its right, the MOSFET driver at the bottom on its STEMMA lead, and the capacitor and diode beside a WAGO on the left, all joined by red and black wiring.](raijin-wiring.jpg)
+
+
 ### Wiring the power bank to the switch
 
 #### USB-A male to bare-wire pigtail 
