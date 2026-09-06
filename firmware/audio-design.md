@@ -20,7 +20,10 @@ verified by simulation.
 | **22 050 Hz** | **441 KB** | **2.2 MB** | **comfortable — the default here** |
 | 16 000 Hz     | 320 KB     | 1.6 MB     | plenty of headroom                 |
 
-Measured from the build in this repo (two 10 s clips at 22.05 kHz):
+The device ships a single 0.5 s burst, which is 22 KB — the budget is a
+non-issue here, and the table above matters only if you swap in something much
+longer. For scale, an earlier build of this repo carrying two 10 s clips at
+22.05 kHz measured:
 
 ```
 text 916,036   data 0   bss 4,744
@@ -28,8 +31,8 @@ text 916,036   data 0   bss 4,744
 buf        2,048 bytes @ 0x200017f8   <- the entire RAM cost of playback
 ```
 
-Roughly 895 KB of 4 MB used. You have ~3 MB of audio headroom even after leaving
-generous room for the CYW43 Wi-Fi/BT stack.
+Roughly 895 KB of 4 MB used, and that was the heavy case. You have ~3 MB of
+audio headroom even after leaving generous room for the CYW43 Wi-Fi/BT stack.
 
 Two things make this cheap:
 
@@ -57,10 +60,14 @@ Leave `GAIN` floating for 9 dB. Pin assignments are `#define`s at the top of
 `src/audio.h`.
 
 `GP22` drives the `In` pin of an Adafruit MOSFET driver, which switches all three
-LED strips together. It goes high for the length of each clip and low between
-them, in step with the amp mute. The driver is a low-side switch on the strips'
-negative rail, and its gate is driven straight from the GPIO, so there is no
-logic supply to wire. See `hardware/assembly.md` for the wiring.
+LED strips together. `main.c` opens and closes that window itself, via
+`audio_leds()`, for exactly `BURST_MS` — it is deliberately *not* tied to the
+clip length or to the amp mute, which brackets the clip slightly more widely (the
+5 ms un-mute settle before the first sample, and two buffers of tail silence
+after the last). Keeping the two separate is what makes the flash a true 500 ms.
+The driver is a low-side switch on the strips' negative rail, and its gate is
+driven straight from the GPIO, so there is no logic supply to wire. See
+`hardware/assembly.md` for the wiring.
 
 `AUDIO_LED_PINS` is a mask rather than a single pin number, so driving more than
 one output takes only another bit.

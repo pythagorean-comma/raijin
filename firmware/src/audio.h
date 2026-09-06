@@ -14,13 +14,17 @@
 #ifndef AUDIO_PIN_AMP_SD
 #define AUDIO_PIN_AMP_SD 19      /* MAX98357A SD_MODE; -1 to disable */
 #endif
-/* MOSFET driver input -- GP22, switching all three LED strips together for the
- * length of a clip. A mask, so more pins can be added. Set to 0 to disable. */
+/* MOSFET driver input -- GP22, switching all three LED strips together.
+ * A mask, so more pins can be added. Set to 0 to disable. */
 #ifndef AUDIO_LED_PINS
 #define AUDIO_LED_PINS   (1u << 22)
 #endif
 
 void audio_init(void);
+
+/* All the LED strips, in one write. The flash window is not tied to the clip
+ * length -- main.c opens and closes it, so the two can differ. */
+void audio_leds(bool on);
 
 /* Start a clip. Returns immediately -- playback runs on DMA + PIO. */
 void audio_play(const audio_clip_t *clip);

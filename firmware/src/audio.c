@@ -147,6 +147,15 @@ void audio_init(void) {
 
 void audio_set_volume(uint16_t vol_q8) { volume_q8 = vol_q8; }
 
+void audio_leds(bool on) {
+#if AUDIO_LED_PINS
+    if (on) gpio_set_mask(AUDIO_LED_PINS);
+    else    gpio_clr_mask(AUDIO_LED_PINS);
+#else
+    (void)on;
+#endif
+}
+
 void audio_play(const audio_clip_t *clip) {
     audio_wait();
 
@@ -158,9 +167,6 @@ void audio_play(const audio_clip_t *clip) {
     ready[0] = prepare(0);
     ready[1] = prepare(1);
 
-#if AUDIO_LED_PINS
-    gpio_set_mask(AUDIO_LED_PINS);      /* all three strips on, in one write */
-#endif
 #if AUDIO_PIN_AMP_SD >= 0
     gpio_put(AUDIO_PIN_AMP_SD, 1);      /* un-mute before the first sample */
     sleep_ms(5);                        /* MAX98357A start-up time */
@@ -182,8 +188,5 @@ void audio_wait(void) {
 
 #if AUDIO_PIN_AMP_SD >= 0
     gpio_put(AUDIO_PIN_AMP_SD, 0);      /* mute: kills the idle hiss between clips */
-#endif
-#if AUDIO_LED_PINS
-    gpio_clr_mask(AUDIO_LED_PINS);      /* strips off with the last sample */
 #endif
 }

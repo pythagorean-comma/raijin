@@ -56,7 +56,7 @@ add_executable(raijin_firmware
 pico_generate_pio_header(raijin_firmware ${CMAKE_CURRENT_LIST_DIR}/src/i2s.pio)
 
 target_include_directories(raijin_firmware PRIVATE ${CMAKE_CURRENT_LIST_DIR}/src ${GEN})
-target_link_libraries(raijin_firmware pico_stdlib hardware_pio hardware_dma)
+target_link_libraries(raijin_firmware pico_stdlib pico_rand hardware_pio hardware_dma)
 
 pico_enable_stdio_usb(raijin_firmware 1)
 pico_enable_stdio_uart(raijin_firmware 0)
