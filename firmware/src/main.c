@@ -45,9 +45,10 @@ _Static_assert(CLIP_COUNT >= 1, "audio/ must contain at least one WAV");
 _Static_assert(INTERVAL_MIN_MS > BURST_MS, "the burst must fit in the interval");
 
 /* Arduino's random(min, max) is uniform over [min, max-1]; this matches it.
- * get_rand_32() draws on the RP2350 hardware entropy source, so the sequence
- * differs on every power-up -- there is no analogRead(A0) seeding trick to
- * copy across, and none is needed. */
+ * get_rand_32() seeds and stirs a PRNG from whatever entropy the chip offers --
+ * the hardware TRNG on the RP2350, the ring oscillator and a RAM hash on an
+ * RP2040 -- so the sequence differs on every power-up either way. There is no
+ * analogRead(A0) seeding trick to copy across, and none is needed. */
 static uint32_t interval_ms(void) {
     return INTERVAL_MIN_MS + get_rand_32() % (INTERVAL_MAX_MS - INTERVAL_MIN_MS);
 }

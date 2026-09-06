@@ -1,6 +1,7 @@
 # Raijin Firmware
 The firmware controls when the Raspberry Pi Pico 2 W device emits a sound and lights the 3 LED strips. It is written in vanilla C.
-It should in theory also work on other variants in the Pico series but these have not been tested.
+It should also work on other boards in the Pico series, though none of them have been tested - see
+[Other boards in the Pico series](#other-boards-in-the-pico-series) below.
 
 The easiest way to get started is to first install VS Code with the Raspberry Pi Pico extension. 
 [See the official C/C++ SDK documentation](https://www.raspberrypi.com/documentation/microcontrollers/c_sdk.html)
@@ -10,6 +11,35 @@ Within VS Code File -> Open Folder -> Select firmware directory
 You should be prompted if you want to import this as a Pico project. Click Yes.
 If you have successfully installed the Raspberry Pi Pico extension the VS Code UI will show "Compile" and "Run" buttons
 along the bottom right. Simply click "Compile" to build the code
+
+## Other boards in the Pico series
+
+The Pico 2 W is what this was built and tested on, but nothing in the firmware is specific to it.
+Building for another board in the series is two lines at the top of `CMakeLists.txt`:
+
+```cmake
+set(PICO_BOARD pico2_w CACHE STRING "Board type")
+set(PICO_PLATFORM rp2350 CACHE STRING "Platform")
+```
+
+For the original Pico, that is `pico` and `rp2040`. They are cache variables without `FORCE`, so
+passing `-DPICO_BOARD=pico -DPICO_PLATFORM=rp2040` to a fresh build directory works just as well and
+leaves the file alone.
+
+Nothing else should need changing:
+
+* The PIO clock divider is computed at runtime from `clock_get_hz(clk_sys)`, so it follows whatever
+  the system clock happens to be — 125 MHz on an RP2040 rather than 150 MHz.
+* `pico_rand` supports the RP2040. With no hardware TRNG it seeds and stirs from the ring oscillator,
+  the microsecond timer, a bus performance counter and a hash of RAM instead.
+* The audio is 22 KB, so the original Pico's 2 MB of flash is ample. Only the budget table in
+  `audio-design.md` assumes 4 MB, and it only matters if you load much longer clips.
+* The boards are pin-compatible, so the wiring and `hardware/assembly.md` are unchanged.
+
+None of the radio variants' Wi-Fi is used — the firmware links `pico_stdlib`, `pico_rand`,
+`hardware_pio` and `hardware_dma`, and never brings up `cyw43`. A non-W board is fine and cheaper.
+
+If you build on something else, the thing to listen for is the audio, since that is what the clock and bus timing affect.
 
 ## Changing the audio files
 
